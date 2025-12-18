@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/* Start Global Rules */
+:root {
+    --blue-color: #2196f3;
+    --green-color: #4caf50;
+    --red-color: #f44336;
+    --main-border-radius: 10px;
+}
+.main-btn {
+    background-color: var(--blue-color);
+    color: #fff;
+    font-weight: bold;
+    border-radius: var(--main-border-radius);
+    cursor: pointer;
+}
+/* Start Global Rules */
+
+nav {
+    button {
+        cursor: pointer;
+        padding: 10px 0;
+        &:hover {
+            background-color: var(--blue-color);
+            color: #fff;
+            font-weight: bold;
+            border-radius: var(--main-border-radius);
+        }
+    }
+}
+
+#update-learner {
+    background-color: var(--green-color);
+}
+#delete-learner {
+    background-color: var(--red-color);
+}
