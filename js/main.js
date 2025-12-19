@@ -75,6 +75,69 @@ cancelBtn.addEventListener("click", () => {
     popup.classList.replace("flex", "hidden");
 });
 
+// <-- 3. Absence Register -->
+
+let absences = [];
+
+//get the previous data
+
+absences = JSON.parse(localStorage.getItem("absences"));
+
+document
+    .getElementById("registre-absence")
+    .addEventListener("click", function () {
+        let id = document.getElementById("input-id").value;
+
+        let date = document.getElementById("input-date").value;
+
+        //creat an abssence obj for storag
+        let abs = {
+            learnerId: id,
+            date: date,
+        };
+
+        //we have to storag that obj in the global array
+        absences.push(abs);
+        // reset the inputs
+        document.getElementById("input-id").value = "";
+        document.getElementById("input-date").value = "";
+
+        //we have to stock thr data in loc storange:
+
+        localStorage.setItem("absences", JSON.stringify(absences));
+    });
+
+// <-- 4. Delay Register -->
+
+let button = document.getElementById("delay-register-btn");
+let delays = [];
+
+delays = JSON.parse(localStorage.getItem("delays"));
+
+button.addEventListener("click", function () {
+    let id = document.getElementById("id").value;
+
+    let time = document.getElementById("time").value;
+
+    let reason = document.getElementById("reason").value;
+
+    let del = {
+        learnerId: id,
+        time: time,
+        reason: reason,
+    };
+    delays.push(del);
+    console.log(delays);
+
+    //nous velons que lorsqu'on clique sur les buttons les inputes se vident
+    document.getElementById("id").value = "";
+    document.getElementById("time").value = "";
+    document.getElementById("reason").value = "";
+
+    //localstorage
+    localStorage.setItem("delays", JSON.stringify(delays));
+});
+
 // <-- Main Functions -->
 
 function setLearnersInPage() {

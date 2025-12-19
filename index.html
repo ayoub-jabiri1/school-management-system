@@ -70,6 +70,7 @@
                     </h1>
                 </header>
                 <!-- End Header -->
+                <!-- Start Learners Management Page -->
                 <section
                     class="page-content bg-[#eee] p-4 min-h-[calc(100%-70px)] w-full"
                 >
@@ -175,6 +176,90 @@
                         </table>
                     </div>
                 </section>
+                <!-- End Learners Management Page -->
+                <!-- Start Absence Register Page -->
+                <section
+                    class="page-content bg-[#eee] p-4 min-h-[calc(100%-70px)] w-full hidden"
+                >
+                    <h2 class="text-xl p-5 font-bold">Absence Registration</h2>
+                    <div
+                        class="bg-white w-fit mx-auto flex flex-col items-center py-4 px-10 rounded-[10px]"
+                    >
+                        <h3 class="text-xl text-center">
+                            Absence Registration Form
+                        </h3>
+                        <div class="w-fit">
+                            <h3 class="text-xl p-5">learner id</h3>
+                            <input
+                                type="text"
+                                class="bg-[#EEE] w-[200px] p-1 text-center rounded-[10px]"
+                                placeholder="Enter student id..."
+                                id="input-id"
+                            />
+                        </div>
+
+                        <div class="w-fit">
+                            <h3 class="text-xl p-5">Absence Date</h3>
+                            <input
+                                type="date"
+                                class="bg-[#EEE] w-[200px] p-1 text-center rounded-[10px]"
+                                id="input-date"
+                            />
+                        </div>
+                        <button
+                            class="bg-[#4CAF50] px-4 py-2 mt-4 text-white rounded-[10px]"
+                            id="registre-absence"
+                        >
+                            Registre
+                        </button>
+                    </div>
+                </section>
+                <!-- End Absence Register Page -->
+                <!-- Start Delay Register Page -->
+                <section
+                    class="page-content bg-[#eee] p-4 min-h-[calc(100%-70px)] w-full hidden"
+                >
+                    <h2 class="font-bold p-5">Delay Registration</h2>
+
+                    <div
+                        class="bg-white w-[300px] mx-auto flex flex-col items-center gap-4 p-4 rounded-[10px]"
+                    >
+                        <h2 class="font-bold">Delay Registration Form</h2>
+                        <div class="w-fit">
+                            <label class="block">Learner ID</label>
+                            <input
+                                type="text"
+                                placeholder="Enter student id..."
+                                class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
+                                id="id"
+                            />
+                        </div>
+                        <div class="w-fit">
+                            <label class="block">Arrival Time</label>
+                            <input
+                                type="time"
+                                class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
+                                id="time"
+                            />
+                        </div>
+                        <div class="w-fit">
+                            <label class="block">Reason of Delay</label>
+                            <input
+                                type="text"
+                                placeholder="Enter the reason..."
+                                class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
+                                id="reason"
+                            />
+                        </div>
+                        <button
+                            class="bg-[#4CAF50] p-1 rounded-[10px] w-[100px] text-white"
+                            id="delay-register-btn"
+                        >
+                            Registre
+                        </button>
+                    </div>
+                </section>
+                <!-- End Delay Register Page -->
             </div>
         </div>
         <script src="./js/main.js"></script>
