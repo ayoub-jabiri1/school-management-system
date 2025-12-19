@@ -122,23 +122,23 @@ function updateLearner(id) {
         learners.find((learner) => learner.id == id)
     );
 
-    learners[currentLearnerIndex] = {
-        id: id,
-        firstName: prompt("Enter the learner's new first name"),
-        lastName: prompt("Enter the learner's new last name"),
-        group: prompt("Enter the learner's group"),
-    };
+    let firstName = prompt("Enter the learner's new first name");
+    let lastName = prompt("Enter the learner's new last name");
+    let group = prompt("Enter the learner's group");
 
-    // let user = {
-    //     id: id,
-    //     firstName: prompt("Enter the learner's new first name"),
-    //     lastName: prompt("Enter the learner's new last name"),
-    //     group: prompt("Enter the learner's group"),
-    // };
+    if (firstName != null && lastName != null && group != null) {
+        learners[currentLearnerIndex] = {
+            id: id,
+            firstName: firstName,
+            lastName: lastName,
+            group: group,
+        };
 
-    // console.log(user);
-
-    setLearnersInPage();
+        // Update the table in the page and localstorage
+        setLearnersInPage();
+    } else {
+        alert("You have to enter all the required data!");
+    }
 }
 
 function removeLearner(id) {
