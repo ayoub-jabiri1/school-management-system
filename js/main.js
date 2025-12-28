@@ -4,26 +4,50 @@ let openNavBtn = document.getElementById("open-nav"),
     closeNavBtn = document.getElementById("close-nav"),
     navBar = document.getElementById("nav-bar"),
     learnersPageBody = document.getElementById("learners-table-body"),
-    addLearnerBtn = document.getElementById("add-learner-btn");
+    addLearnerBtn = document.getElementById("add-learner-btn"),
+    historyPageBody = document.getElementById("history-table-body");
 
 // <-- 2. Handle the nav bar -->
+
+// Show and hide the nav bar
 
 openNavBtn.addEventListener("click", () => {
     navBar.classList.replace("left-[-250px]", "left-0");
 });
-
 closeNavBtn.addEventListener("click", () => {
     navBar.classList.replace("left-0", "left-[-250px]");
+});
+
+// Toggle pages
+
+let navBtns = document.querySelectorAll("nav button"),
+    pages = document.querySelectorAll(".page-content > div");
+
+navBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        let pageId = btn.dataset.page;
+
+        // Remove show-page class from all pages and add it on the targeted page
+        pages.forEach((page) => page.classList.remove("show-page"));
+        document.getElementById(pageId).classList.add("show-page");
+
+        // Remove active class from all buttons and add it on clicked button
+        navBtns.forEach((btn) => btn.classList.remove("main-btn"));
+        e.target.classList.add("main-btn");
+
+        // Hide the side bar
+        navBar.classList.replace("left-0", "left-[-250px]");
+    });
 });
 
 // <-- 3. Learners Management -->
 
 let learners = [
-    // { id: 1, firstName: "Alice", lastName: "Johnson", group: 1 },
-    // { id: 2, firstName: "Bob", lastName: "Smith", group: 2 },
-    // { id: 3, firstName: "Charlie", lastName: "Davis", group: 1 },
-    // { id: 4, firstName: "Diana", lastName: "Miller", group: 3 },
-    // { id: 5, firstName: "Ethan", lastName: "Wilson", group: 2 },
+    { id: 1, firstName: "Alice", lastName: "Johnson", group: 1 },
+    { id: 2, firstName: "Bob", lastName: "Smith", group: 2 },
+    { id: 3, firstName: "Charlie", lastName: "Davis", group: 1 },
+    { id: 4, firstName: "Diana", lastName: "Miller", group: 3 },
+    { id: 5, firstName: "Ethan", lastName: "Wilson", group: 2 },
 ];
 
 // Get data from localstorage
@@ -75,13 +99,15 @@ cancelBtn.addEventListener("click", () => {
     popup.classList.replace("flex", "hidden");
 });
 
-// <-- 3. Absence Register -->
+// <-- 4. Absence Register -->
 
 let absences = [];
 
 //get the previous data
 
-absences = JSON.parse(localStorage.getItem("absences"));
+if (localStorage.getItem("absences")) {
+    absences = JSON.parse(localStorage.getItem("absences"));
+}
 
 document
     .getElementById("registre-absence")
@@ -90,29 +116,36 @@ document
 
         let date = document.getElementById("input-date").value;
 
-        //creat an abssence obj for storag
+        // creat an abssence obj for storag
         let abs = {
             learnerId: id,
             date: date,
         };
 
-        //we have to storag that obj in the global array
+        // we have to storag that obj in the global array
         absences.push(abs);
+
         // reset the inputs
         document.getElementById("input-id").value = "";
         document.getElementById("input-date").value = "";
 
-        //we have to stock thr data in loc storange:
+        // Update history
+        getHistoryData();
+
+        // we have to stock thr data in loc storange:
 
         localStorage.setItem("absences", JSON.stringify(absences));
     });
 
-// <-- 4. Delay Register -->
+// <-- 5. Delay Register -->
 
 let button = document.getElementById("delay-register-btn");
+
 let delays = [];
 
-delays = JSON.parse(localStorage.getItem("delays"));
+if (localStorage.getItem("delays")) {
+    delays = JSON.parse(localStorage.getItem("delays"));
+}
 
 button.addEventListener("click", function () {
     let id = document.getElementById("id").value;
@@ -120,25 +153,36 @@ button.addEventListener("click", function () {
     let time = document.getElementById("time").value;
 
     let reason = document.getElementById("reason").value;
+    let date = new Date().toLocaleString("en-CA");
 
     let del = {
         learnerId: id,
         time: time,
         reason: reason,
+        date: date.slice(0, date.indexOf(",")),
     };
     delays.push(del);
-    console.log(delays);
 
     //nous velons que lorsqu'on clique sur les buttons les inputes se vident
     document.getElementById("id").value = "";
     document.getElementById("time").value = "";
     document.getElementById("reason").value = "";
 
+    // Update history
+    getHistoryData();
+
     //localstorage
     localStorage.setItem("delays", JSON.stringify(delays));
 });
 
-// <-- Main Functions -->
+// 6. History Page
+
+let history = [];
+
+// Get history data and set it in the page
+getHistoryData();
+
+// <-- App Functions -->
 
 function setLearnersInPage() {
     // Empty the table
@@ -220,4 +264,74 @@ function setItemInLocalStorage(itemKey, ItemValue) {
 
 function getItemFromLocalStorage(itemKey) {
     return JSON.parse(localStorage.getItem(itemKey));
+}
+
+function getHistoryData() {
+    history = [];
+
+    // Get dates from absences table
+    getDate(absences);
+
+    // Get dates from absences table
+    getDate(delays);
+
+    // Get number absences
+    getStats(absences, "absencesNumber");
+
+    // Get number delays
+    getStats(delays, "delaysNumber");
+
+    setHistoryDataInPage();
+
+    // Start local functions
+
+    function getDate(array) {
+        for (let el of array) {
+            if (!history.find((obj) => obj.date == el.date)) {
+                history.push({
+                    date: el.date,
+                    absencesNumber: 0,
+                    delaysNumber: 0,
+                });
+            }
+        }
+    }
+
+    function getStats(array, value) {
+        for (let hist of history) {
+            for (let el of array) {
+                if (hist.date == el.date) {
+                    hist[value]++;
+                }
+            }
+        }
+    }
+}
+
+function setHistoryDataInPage() {
+    // Empty the table
+    historyPageBody.innerHTML = "";
+
+    // Set hitory in the body
+    for (let hist of history) {
+        historyPageBody.innerHTML += `
+            <tr
+                class="block w-full px-2 py-4 not-last:border-b not-last:border-[#888080]"
+            >
+                <td class="w-[200px] text-center">
+                    ${hist.date}
+                </td>
+                <td class="w-[200px] text-center">${hist.absencesNumber}</td>
+                <td class="w-[200px] text-center">${hist.delaysNumber}</td>
+                <td class="w-[200px] text-center">
+                    <button
+                        id="history-details"
+                        class="main-btn bg-[#eee]! text-[#888080]! text-sm w-[90px] py-2 border border-[#888080]"
+                    >
+                        Update
+                    </button>
+                </td>
+            </tr>
+        `;
+    }
 }
