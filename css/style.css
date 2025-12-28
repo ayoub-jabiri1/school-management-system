@@ -29,6 +29,16 @@ nav {
     }
 }
 
+.page-content > div {
+    width: 100%;
+    position: absolute;
+    left: 150%;
+    transition: 0.3s;
+    &.show-page {
+        left: 0;
+    }
+}
+
 #update-learner {
     background-color: var(--green-color);
 }
