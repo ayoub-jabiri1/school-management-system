@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Absence & Delay Management System</title>
+        <title>Authentication</title>
         <!-- Remix Icon Link -->
         <link
             href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
@@ -15,296 +15,215 @@
         <link rel="stylesheet" href="./css/style.css" />
     </head>
     <body>
-        <div id="app">
-            <!-- Start Side Bar -->
-            <aside
-                id="nav-bar"
-                class="bg-white fixed top-0 left-[-250px] z-10 w-[250px] h-screen p-4 shadow-sm transition-all"
+        <div
+            id="app"
+            class="bg-[#eee] w-screen h-screen p-4 flex justify-center items-center"
+        >
+            <div
+                class="w-[650px] md:h-[400px] flex max-md:flex-col rounded-[10px] overflow-hidden"
             >
-                <button
-                    id="close-nav"
-                    class="absolute top-1 right-1 w-10 h-10 text-3xl cursor-pointer"
+                <div
+                    class="bg-[#2196f3] p-4 text-white md:w-[40%] flex flex-col justify-center items-center gap-3"
                 >
-                    <i class="ri-close-line"></i>
-                </button>
-                <div class="w-[70px] mx-auto">
-                    <img src="./imgs/logo.png" class="w-full" />
+                    <h1 class="text-2xl font-bold">Welcome!</h1>
+                    <div>
+                        <h2 class="text-center">Choose your role:</h2>
+                        <div class="flex gap-3">
+                            <button
+                                id="admin-btn"
+                                class="main-btn active-btn text-sm font-normal! w-[100px] py-2 mt-4 block max-md:mx-auto border border-white"
+                            >
+                                Admin
+                            </button>
+                            <button
+                                id="learner-btn"
+                                class="main-btn text-sm font-normal! w-[100px] py-2 mt-4 block max-md:mx-auto border border-white"
+                            >
+                                learner
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <nav class="mt-6 flex flex-col gap-4">
-                    <button
-                        class="main-btn w-full text-[15px] rounded-[10px] transition-all"
-                        data-page="learners-management-page"
+                <div class="bg-white md:w-[60%] max-md:h-[300px]">
+                    <!-- Start Admin Page -->
+                    <div
+                        id="admin-page"
+                        class="w-full h-full flex flex-col justify-center items-center"
                     >
-                        Learners management
-                    </button>
-                    <button
-                        class="w-full text-[15px] rounded-[10px] transition-all"
-                        data-page="absence-register-page"
-                    >
-                        Absence Registration
-                    </button>
-                    <button
-                        class="w-full text-[15px] rounded-[10px] transition-all"
-                        data-page="delay-register-page"
-                    >
-                        Delay Registration
-                    </button>
-                    <button
-                        class="w-full text-[15px] rounded-[10px] transition-all"
-                        data-page="history-page"
-                    >
-                        History
-                    </button>
-                </nav>
-            </aside>
-            <!-- End Side Bar -->
-            <div id="app-body" class="h-screen">
-                <!-- Start Header -->
-                <header class="h-[70px] p-4 flex items-center">
-                    <button
-                        id="open-nav"
-                        class="text-3xl w-10 h-10 flex justify-center items-center cursor-pointer"
-                    >
-                        <i class="ri-menu-line"></i>
-                    </button>
-                    <h1
-                        class="text-2xl max-md:text-[20px] font-bold flex-1 text-center"
-                    >
-                        Absence & Delay Management System
-                    </h1>
-                </header>
-                <!-- End Header -->
-                <section
-                    class="page-content bg-[#eee] min-h-[calc(100%-70px)] w-full relative overflow-hidden"
-                >
-                    <!-- Start Learners Management Page -->
-                    <div id="learners-management-page" class="show-page p-4">
-                        <h2
-                            id="page-title"
-                            class="text-2xl font-bold max-md:text-center"
-                        >
-                            Learners Management
-                        </h2>
-                        <button
-                            id="add-learner-btn"
-                            class="main-btn px-5 py-2 mt-4 block max-md:mx-auto"
-                        >
-                            Add Learner
-                        </button>
-                        <!-- Start Add New Learner Pop up -->
+                        <!-- Start Sign in -->
                         <div
-                            id="add-learner-popup"
-                            class="fixed hidden top-0 left-0 w-screen h-screen bg-[#00000059] justify-center items-center"
+                            id="admin-sign-in"
+                            class="flex flex-col justify-between items-center"
                         >
-                            <div
-                                class="bg-white py-6 px-8 flex flex-col items-center rounded-[10px]"
+                            <h3
+                                class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
                             >
-                                <h3 class="font-bold text-[20px] mb-2">
-                                    Add a New Learner
-                                </h3>
-                                <div class="w-fit mb-2">
-                                    <label class="block text-[14px] mb-1"
-                                        >Learner's first name</label
-                                    >
-                                    <input
-                                        id="add-first-name"
-                                        type="text"
-                                        placeholder="Enter the learner first name..."
-                                        class="bg-[#eee] border border-[#888080] w-[250px] px-2 py-1.5 text-[14px] outline-none"
-                                    />
-                                </div>
-                                <div class="w-fit mb-2">
-                                    <label class="block text-[14px] mb-1"
-                                        >Learner's last name</label
-                                    >
-                                    <input
-                                        id="add-last-name"
-                                        type="text"
-                                        placeholder="Enter the learner last name..."
-                                        class="bg-[#eee] border border-[#888080] w-[250px] px-2 py-1.5 text-[14px] outline-none"
-                                    />
-                                </div>
-                                <div class="w-fit mb-2">
-                                    <label class="block text-[14px] mb-1"
-                                        >Learner's group</label
-                                    >
-                                    <input
-                                        id="add-group"
-                                        type="text"
-                                        placeholder="Enter the learner group..."
-                                        class="bg-[#eee] border border-[#888080] w-[250px] px-2 py-1.5 text-[14px] outline-none"
-                                    />
-                                </div>
-                                <button
-                                    id="register-learner-btn"
-                                    class="main-btn block w-[170px] py-2 mt-4"
+                                Sign in to Account
+                            </h3>
+                            <div>
+                                <label class="inline-block ml-1 max-md:text-sm"
+                                    >ID</label
                                 >
-                                    Register Learner
-                                </button>
-                                <button
-                                    id="cancel-adding-btn"
-                                    class="main-btn block w-[170px] py-2 mt-3 bg-[#F44336]!"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                        <!-- End Add New Learner Pop up -->
-                        <table
-                            class="block bg-white rounded-[10px] max-w-[800px] max-md:w-[95%] mt-6 mx-auto overflow-auto"
-                        >
-                            <thead
-                                class="text-[#888080] block w-[800px] p-2 border-b border-[#888080]"
-                            >
-                                <tr class="w-full">
-                                    <th class="w-[50px] font-normal">ID</th>
-                                    <th class="w-[150px] font-normal">
-                                        Fisrt Name
-                                    </th>
-                                    <th class="w-[150px] font-normal">
-                                        Last Name
-                                    </th>
-                                    <th class="w-[150px] font-normal">Group</th>
-                                    <th class="w-[150px] font-normal">
-                                        Update
-                                    </th>
-                                    <th class="w-[150px] font-normal">
-                                        Delete
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody
-                                id="learners-table-body"
-                                class="block w-[800px]"
-                            ></tbody>
-                        </table>
-                    </div>
-                    <!-- End Learners Management Page -->
-
-                    <!-- Start Absence Register Page -->
-                    <div id="absence-register-page" class="p-4">
-                        <h2
-                            id="page-title"
-                            class="text-2xl font-bold max-md:text-center"
-                        >
-                            Absence Registration
-                        </h2>
-                        <div
-                            class="bg-white w-fit mx-auto flex flex-col items-center gap-4 py-4 px-10 rounded-[10px]"
-                        >
-                            <h3 class="font-bold">Absence Registration Form</h3>
-                            <div class="w-fit">
-                                <h3>learner id</h3>
                                 <input
                                     type="text"
-                                    class="bg-[#EEE] w-[200px] p-1 rounded-[10px]"
-                                    placeholder="Enter student id..."
-                                    id="input-id"
-                                />
-                            </div>
-
-                            <div class="w-fit">
-                                <h3>Absence Date</h3>
-                                <input
-                                    type="date"
-                                    class="bg-[#EEE] w-[200px] p-1 text-center rounded-[10px]"
-                                    id="input-date"
+                                    placeholder="Enter your id..."
+                                    id="admin-id-input"
+                                    class="block bg-[#eee] w-[200px] py-1 px-2 max-md:text-sm border border-[#888080] rounded-[10px] outline-none"
                                 />
                             </div>
                             <button
-                                class="bg-[#4CAF50] px-4 py-2 mt-4 text-white rounded-[10px]"
-                                id="registre-absence"
+                                id="admin-sign-in-btn"
+                                class="main-btn max-md:text-sm px-5 py-2 mt-4 block max-md:mx-auto"
                             >
-                                Registre
+                                Sign in
                             </button>
+                            <p class="text-[#888080] max-md:text-sm mt-1">
+                                Don’t have an account?
+                                <button class="text-[#2196f3] cursor-pointer">
+                                    Sign up
+                                </button>
+                            </p>
                         </div>
-                    </div>
-                    <!-- End Absence Register Page -->
-                    <!-- Start Delay Register Page -->
-                    <div id="delay-register-page" class="p-4">
-                        <h2
-                            id="page-title"
-                            class="text-2xl font-bold max-md:text-center"
-                        >
-                            Delay Registration
-                        </h2>
-
+                        <!-- End Sign in -->
+                        <!-- Start Sign up -->
                         <div
-                            class="bg-white w-[300px] mx-auto flex flex-col items-center gap-4 p-4 rounded-[10px]"
+                            id="admin-sign-up"
+                            class="flex-col justify-between items-center hidden"
                         >
-                            <h2 class="font-bold">Delay Registration Form</h2>
-                            <div class="w-fit">
-                                <label class="block">Learner ID</label>
+                            <h3
+                                class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
+                            >
+                                Create Account
+                            </h3>
+                            <div>
+                                <label class="inline-block ml-1 max-md:text-sm"
+                                    >First Name</label
+                                >
                                 <input
                                     type="text"
-                                    placeholder="Enter student id..."
-                                    class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
-                                    id="id"
+                                    placeholder="Enter your id..."
+                                    id="admin-first-name-input"
+                                    class="block bg-[#eee] w-[200px] py-1 px-2 max-md:text-sm border border-[#888080] rounded-[10px] outline-none"
                                 />
                             </div>
-                            <div class="w-fit">
-                                <label class="block">Arrival Time</label>
-                                <input
-                                    type="time"
-                                    class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
-                                    id="time"
-                                />
-                            </div>
-                            <div class="w-fit">
-                                <label class="block">Reason of Delay</label>
+                            <div>
+                                <label class="inline-block ml-1 max-md:text-sm"
+                                    >Last Name</label
+                                >
                                 <input
                                     type="text"
-                                    placeholder="Enter the reason..."
-                                    class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
-                                    id="reason"
+                                    placeholder="Enter your id..."
+                                    id="admin-last-name-input"
+                                    class="block bg-[#eee] w-[200px] py-1 px-2 max-md:text-sm border border-[#888080] rounded-[10px] outline-none"
                                 />
                             </div>
                             <button
-                                class="bg-[#4CAF50] p-1 rounded-[10px] w-[100px] text-white"
-                                id="delay-register-btn"
+                                id="admin-sign-in-btn"
+                                class="main-btn px-5 py-2 mt-4 block max-md:text-sm max-md:mx-auto"
                             >
-                                Registre
+                                Sign up
                             </button>
+                            <p class="text-[#888080] mt-1 max-md:text-sm">
+                                Already have an account?
+                                <button class="text-[#2196f3] cursor-pointer">
+                                    Sign in
+                                </button>
+                            </p>
                         </div>
+                        <!-- End Sign up -->
                     </div>
-                    <!-- End Delay Register Page -->
-                    <!-- Start History Page -->
-                    <div id="history-page" class="p-4">
-                        <h2
-                            id="page-title"
-                            class="text-2xl font-bold max-md:text-center"
+                    <!-- End Admin Page -->
+                    <!-- Start Learner Page -->
+                    <div
+                        id="learner-page"
+                        class="w-full h-full flex-col justify-center items-center hidden"
+                    >
+                        <!-- Start Sign in -->
+                        <div
+                            id="learner-sign-in"
+                            class="flex-col justify-between items-center"
                         >
-                            History
-                        </h2>
-                        <table
-                            class="block bg-white rounded-[10px] max-w-[800px] max-md:w-[95%] mt-6 mx-auto overflow-auto"
-                        >
-                            <thead
-                                class="text-[#888080] block w-[800px] p-2 border-b border-[#888080]"
+                            <h3
+                                class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
                             >
-                                <tr class="w-full">
-                                    <th class="w-[200px] font-normal">Date</th>
-                                    <th class="w-[200px] font-normal">
-                                        Number of Absences
-                                    </th>
-                                    <th class="w-[200px] font-normal">
-                                        Number of Delays
-                                    </th>
-                                    <th class="w-[200px] font-normal">
-                                        Details
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody
-                                id="history-table-body"
-                                class="block w-[800px]"
-                            ></tbody>
-                        </table>
+                                Sign in to Account
+                            </h3>
+                            <div>
+                                <label class="inline-block ml-1 max-md:text-sm"
+                                    >ID</label
+                                >
+                                <input
+                                    type="text"
+                                    placeholder="Enter your id..."
+                                    id="learner-id-input"
+                                    class="block bg-[#eee] w-[200px] py-1 px-2 max-md:text-sm border border-[#888080] rounded-[10px] outline-none"
+                                />
+                            </div>
+                            <button
+                                id="learner-sign-in-btn"
+                                class="main-btn px-5 py-2 mt-4 block max-md:text-sm max-md:mx-auto"
+                            >
+                                Sign in
+                            </button>
+                            <p class="text-[#888080] mt-1 max-md:text-sm">
+                                Don’t have an account?
+                                <button class="text-[#2196f3] cursor-pointer">
+                                    Sign up
+                                </button>
+                            </p>
+                        </div>
+                        <!-- End Sign in -->
+                        <!-- Start Sign up -->
+                        <div
+                            id="learner-sign-up"
+                            class="flex flex-col justify-between items-center"
+                        >
+                            <h3
+                                class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
+                            >
+                                Create Account
+                            </h3>
+                            <div>
+                                <label class="inline-block ml-1 max-md:text-sm"
+                                    >First Name</label
+                                >
+                                <input
+                                    type="text"
+                                    placeholder="Enter your id..."
+                                    id="learner-first-name-input"
+                                    class="block bg-[#eee] w-[200px] py-1 px-2 max-md:text-sm border border-[#888080] rounded-[10px] outline-none"
+                                />
+                            </div>
+                            <div>
+                                <label class="inline-block ml-1 max-md:text-sm"
+                                    >Last Name</label
+                                >
+                                <input
+                                    type="text"
+                                    placeholder="Enter your id..."
+                                    id="learner-last-name-input"
+                                    class="block bg-[#eee] w-[200px] py-1 px-2 max-md:text-sm border border-[#888080] rounded-[10px] outline-none"
+                                />
+                            </div>
+                            <button
+                                id="learner-sign-in-btn"
+                                class="main-btn px-5 py-2 mt-4 max-md:text-sm block max-md:mx-auto"
+                            >
+                                Sign up
+                            </button>
+                            <p class="text-[#888080] mt-1 max-md:text-sm">
+                                Already have an account?
+                                <button class="text-[#2196f3] cursor-pointer">
+                                    Sign in
+                                </button>
+                            </p>
+                        </div>
+                        <!-- End Sign up -->
                     </div>
-                    <!-- End History Page -->
-                </section>
+                    <!-- End Learner Page -->
+                </div>
             </div>
         </div>
-        <script src="./js/main.js"></script>
+        <script src="./js/index.js"></script>
     </body>
 </html>

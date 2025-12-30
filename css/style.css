@@ -16,6 +16,13 @@
 }
 /* Start Global Rules */
 
+/* Start Authentication page */
+.active-btn {
+    background-color: #fff;
+    color: #000;
+}
+/* End Authentication page */
+
 nav {
     button {
         cursor: pointer;

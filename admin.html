@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin: Page</title>
+        <!-- Remix Icon Link -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- Custom css style -->
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <!-- Start Side Bar -->
+            <aside
+                id="nav-bar"
+                class="bg-white fixed top-0 left-[-250px] z-10 w-[250px] h-screen p-4 shadow-sm transition-all"
+            >
+                <button
+                    id="close-nav"
+                    class="absolute top-1 right-1 w-10 h-10 text-3xl cursor-pointer"
+                >
+                    <i class="ri-close-line"></i>
+                </button>
+                <div class="w-[70px] mx-auto">
+                    <img src="./imgs/logo.png" class="w-full" />
+                </div>
+                <nav class="mt-6 flex flex-col gap-4">
+                    <button
+                        class="main-btn w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="learners-management-page"
+                    >
+                        Learners management
+                    </button>
+                    <button
+                        class="w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="absence-register-page"
+                    >
+                        Absence Registration
+                    </button>
+                    <button
+                        class="w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="delay-register-page"
+                    >
+                        Delay Registration
+                    </button>
+                    <button
+                        class="w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="history-page"
+                    >
+                        History
+                    </button>
+                </nav>
+            </aside>
+            <!-- End Side Bar -->
+            <div id="app-body" class="h-screen">
+                <!-- Start Header -->
+                <header class="h-[70px] p-4 flex items-center">
+                    <button
+                        id="open-nav"
+                        class="text-3xl w-10 h-10 flex justify-center items-center cursor-pointer"
+                    >
+                        <i class="ri-menu-line"></i>
+                    </button>
+                    <h1
+                        class="text-2xl max-md:text-[20px] font-bold flex-1 text-center"
+                    >
+                        Absence & Delay Management System
+                    </h1>
+                </header>
+                <!-- End Header -->
+                <section
+                    class="page-content bg-[#eee] min-h-[calc(100%-70px)] w-full relative overflow-hidden"
+                >
+                    <!-- Start Learners Management Page -->
+                    <div id="learners-management-page" class="show-page p-4">
+                        <h2
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            Learners Management
+                        </h2>
+                        <button
+                            id="add-learner-btn"
+                            class="main-btn px-5 py-2 mt-4 block max-md:mx-auto"
+                        >
+                            Add Learner
+                        </button>
+                        <!-- Start Add New Learner Pop up -->
+                        <div
+                            id="add-learner-popup"
+                            class="fixed hidden top-0 left-0 w-screen h-screen bg-[#00000059] justify-center items-center"
+                        >
+                            <div
+                                class="bg-white py-6 px-8 flex flex-col items-center rounded-[10px]"
+                            >
+                                <h3 class="font-bold text-[20px] mb-2">
+                                    Add a New Learner
+                                </h3>
+                                <div class="w-fit mb-2">
+                                    <label class="block text-[14px] mb-1"
+                                        >Learner's first name</label
+                                    >
+                                    <input
+                                        id="add-first-name"
+                                        type="text"
+                                        placeholder="Enter the learner first name..."
+                                        class="bg-[#eee] border border-[#888080] w-[250px] px-2 py-1.5 text-[14px] outline-none"
+                                    />
+                                </div>
+                                <div class="w-fit mb-2">
+                                    <label class="block text-[14px] mb-1"
+                                        >Learner's last name</label
+                                    >
+                                    <input
+                                        id="add-last-name"
+                                        type="text"
+                                        placeholder="Enter the learner last name..."
+                                        class="bg-[#eee] border border-[#888080] w-[250px] px-2 py-1.5 text-[14px] outline-none"
+                                    />
+                                </div>
+                                <div class="w-fit mb-2">
+                                    <label class="block text-[14px] mb-1"
+                                        >Learner's group</label
+                                    >
+                                    <input
+                                        id="add-group"
+                                        type="text"
+                                        placeholder="Enter the learner group..."
+                                        class="bg-[#eee] border border-[#888080] w-[250px] px-2 py-1.5 text-[14px] outline-none"
+                                    />
+                                </div>
+                                <button
+                                    id="register-learner-btn"
+                                    class="main-btn block w-[170px] py-2 mt-4"
+                                >
+                                    Register Learner
+                                </button>
+                                <button
+                                    id="cancel-adding-btn"
+                                    class="main-btn block w-[170px] py-2 mt-3 bg-[#F44336]!"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                        <!-- End Add New Learner Pop up -->
+                        <table
+                            class="block bg-white rounded-[10px] max-w-[800px] max-md:w-[95%] mt-6 mx-auto overflow-auto"
+                        >
+                            <thead
+                                class="text-[#888080] block w-[800px] p-2 border-b border-[#888080]"
+                            >
+                                <tr class="w-full">
+                                    <th class="w-[50px] font-normal">ID</th>
+                                    <th class="w-[150px] font-normal">
+                                        Fisrt Name
+                                    </th>
+                                    <th class="w-[150px] font-normal">
+                                        Last Name
+                                    </th>
+                                    <th class="w-[150px] font-normal">Group</th>
+                                    <th class="w-[150px] font-normal">
+                                        Update
+                                    </th>
+                                    <th class="w-[150px] font-normal">
+                                        Delete
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                id="learners-table-body"
+                                class="block w-[800px]"
+                            ></tbody>
+                        </table>
+                    </div>
+                    <!-- End Learners Management Page -->
+                    <!-- Start Absence Register Page -->
+                    <div id="absence-register-page" class="p-4">
+                        <h2
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            Absence Registration
+                        </h2>
+                        <div
+                            class="bg-white w-fit mx-auto flex flex-col items-center gap-4 py-4 px-10 rounded-[10px]"
+                        >
+                            <h3 class="font-bold">Absence Registration Form</h3>
+                            <div class="w-fit">
+                                <h3>learner id</h3>
+                                <input
+                                    type="text"
+                                    class="bg-[#EEE] w-[200px] p-1 rounded-[10px]"
+                                    placeholder="Enter student id..."
+                                    id="input-id"
+                                />
+                            </div>
+
+                            <div class="w-fit">
+                                <h3>Absence Date</h3>
+                                <input
+                                    type="date"
+                                    class="bg-[#EEE] w-[200px] p-1 text-center rounded-[10px]"
+                                    id="input-date"
+                                />
+                            </div>
+                            <button
+                                class="bg-[#4CAF50] px-4 py-2 mt-4 text-white rounded-[10px]"
+                                id="registre-absence"
+                            >
+                                Registre
+                            </button>
+                        </div>
+                    </div>
+                    <!-- End Absence Register Page -->
+                    <!-- Start Delay Register Page -->
+                    <div id="delay-register-page" class="p-4">
+                        <h2
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            Delay Registration
+                        </h2>
+
+                        <div
+                            class="bg-white w-[300px] mx-auto flex flex-col items-center gap-4 p-4 rounded-[10px]"
+                        >
+                            <h2 class="font-bold">Delay Registration Form</h2>
+                            <div class="w-fit">
+                                <label class="block">Learner ID</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter student id..."
+                                    class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
+                                    id="id"
+                                />
+                            </div>
+                            <div class="w-fit">
+                                <label class="block">Arrival Time</label>
+                                <input
+                                    type="time"
+                                    class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
+                                    id="time"
+                                />
+                            </div>
+                            <div class="w-fit">
+                                <label class="block">Reason of Delay</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter the reason..."
+                                    class="bg-[#EEEEEE] rounded-[10px] p-1 w-[150px]"
+                                    id="reason"
+                                />
+                            </div>
+                            <button
+                                class="bg-[#4CAF50] p-1 rounded-[10px] w-[100px] text-white"
+                                id="delay-register-btn"
+                            >
+                                Registre
+                            </button>
+                        </div>
+                    </div>
+                    <!-- End Delay Register Page -->
+                    <!-- Start History Page -->
+                    <div id="history-page" class="p-4">
+                        <h2
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            History
+                        </h2>
+                        <table
+                            class="block bg-white rounded-[10px] max-w-[800px] max-md:w-[95%] mt-6 mx-auto overflow-auto"
+                        >
+                            <thead
+                                class="text-[#888080] block w-[800px] p-2 border-b border-[#888080]"
+                            >
+                                <tr class="w-full">
+                                    <th class="w-[200px] font-normal">Date</th>
+                                    <th class="w-[200px] font-normal">
+                                        Number of Absences
+                                    </th>
+                                    <th class="w-[200px] font-normal">
+                                        Number of Delays
+                                    </th>
+                                    <th class="w-[200px] font-normal">
+                                        Details
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                id="history-table-body"
+                                class="block w-[800px]"
+                            ></tbody>
+                        </table>
+                        <!-- Start Add History Details Pop up -->
+                        <div
+                            id="histrory-popup"
+                            class="fixed hidden top-0 left-0 w-screen h-screen bg-[#00000059] justify-center items-center"
+                        >
+                            <div
+                                class="bg-white py-6 px-8 flex flex-col items-center rounded-[10px]"
+                            ></div>
+                        </div>
+                        <!-- End Add History Details Pop up -->
+                    </div>
+                    <!-- End History Page -->
+                </section>
+            </div>
+        </div>
+        <script src="./js/main.js"></script>
+        <script src="./js/admin.js"></script>
+    </body>
+</html>
