@@ -21,6 +21,13 @@
     background-color: #fff;
     color: #000;
 }
+#admin-page,
+#learner-page {
+    transition: 0.3s;
+    &.show-page {
+        left: 50%;
+    }
+}
 /* End Authentication page */
 
 nav {

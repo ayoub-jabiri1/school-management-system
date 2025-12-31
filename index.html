@@ -28,27 +28,29 @@
                     <h1 class="text-2xl font-bold">Welcome!</h1>
                     <div>
                         <h2 class="text-center">Choose your role:</h2>
-                        <div class="flex gap-3">
+                        <div id="roles" class="flex gap-3">
                             <button
                                 id="admin-btn"
                                 class="main-btn active-btn text-sm font-normal! w-[100px] py-2 mt-4 block max-md:mx-auto border border-white"
+                                data-page="admin-page"
                             >
                                 Admin
                             </button>
                             <button
                                 id="learner-btn"
                                 class="main-btn text-sm font-normal! w-[100px] py-2 mt-4 block max-md:mx-auto border border-white"
+                                data-page="learner-page"
                             >
                                 learner
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white md:w-[60%] max-md:h-[300px]">
+                <div class="relative bg-white md:w-[60%] max-md:h-[300px]">
                     <!-- Start Admin Page -->
                     <div
                         id="admin-page"
-                        class="w-full h-full flex flex-col justify-center items-center"
+                        class="show-page absolute left-[150%] top-[50%] translate-[-50%] w-[300px] flex flex-col justify-center items-center"
                     >
                         <!-- Start Sign in -->
                         <div
@@ -58,7 +60,7 @@
                             <h3
                                 class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
                             >
-                                Sign in to Account
+                                a: Sign in to Account
                             </h3>
                             <div>
                                 <label class="inline-block ml-1 max-md:text-sm"
@@ -79,7 +81,10 @@
                             </button>
                             <p class="text-[#888080] max-md:text-sm mt-1">
                                 Don’t have an account?
-                                <button class="text-[#2196f3] cursor-pointer">
+                                <button
+                                    id="admin-toggle-sign-up"
+                                    class="text-[#2196f3] cursor-pointer"
+                                >
                                     Sign up
                                 </button>
                             </p>
@@ -93,7 +98,7 @@
                             <h3
                                 class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
                             >
-                                Create Account
+                                a: Create Account
                             </h3>
                             <div>
                                 <label class="inline-block ml-1 max-md:text-sm"
@@ -125,7 +130,10 @@
                             </button>
                             <p class="text-[#888080] mt-1 max-md:text-sm">
                                 Already have an account?
-                                <button class="text-[#2196f3] cursor-pointer">
+                                <button
+                                    id="admin-toggle-sign-in"
+                                    class="text-[#2196f3] cursor-pointer"
+                                >
                                     Sign in
                                 </button>
                             </p>
@@ -136,17 +144,17 @@
                     <!-- Start Learner Page -->
                     <div
                         id="learner-page"
-                        class="w-full h-full flex-col justify-center items-center hidden"
+                        class="absolute left-[150%] top-[50%] translate-[-50%] w-[300px] flex flex-col justify-center items-center"
                     >
                         <!-- Start Sign in -->
                         <div
                             id="learner-sign-in"
-                            class="flex-col justify-between items-center"
+                            class="flex flex-col justify-between items-center"
                         >
                             <h3
                                 class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
                             >
-                                Sign in to Account
+                                p: Sign in to Account
                             </h3>
                             <div>
                                 <label class="inline-block ml-1 max-md:text-sm"
@@ -167,7 +175,10 @@
                             </button>
                             <p class="text-[#888080] mt-1 max-md:text-sm">
                                 Don’t have an account?
-                                <button class="text-[#2196f3] cursor-pointer">
+                                <button
+                                    id="learner-toggle-sign-up"
+                                    class="text-[#2196f3] cursor-pointer"
+                                >
                                     Sign up
                                 </button>
                             </p>
@@ -176,12 +187,12 @@
                         <!-- Start Sign up -->
                         <div
                             id="learner-sign-up"
-                            class="flex flex-col justify-between items-center"
+                            class="flex-col justify-between items-center hidden"
                         >
                             <h3
                                 class="text-[#2196f3] text-3xl max-md:text-2xl font-bold mb-6"
                             >
-                                Create Account
+                                p: Create Account
                             </h3>
                             <div>
                                 <label class="inline-block ml-1 max-md:text-sm"
@@ -213,7 +224,10 @@
                             </button>
                             <p class="text-[#888080] mt-1 max-md:text-sm">
                                 Already have an account?
-                                <button class="text-[#2196f3] cursor-pointer">
+                                <button
+                                    id="learner-toggle-sign-in"
+                                    class="text-[#2196f3] cursor-pointer"
+                                >
                                     Sign in
                                 </button>
                             </p>
