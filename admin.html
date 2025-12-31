@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin: Page</title>
+        <title>Admin Page</title>
         <!-- Remix Icon Link -->
         <link
             href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
@@ -302,11 +302,70 @@
                         <!-- Start Add History Details Pop up -->
                         <div
                             id="histrory-popup"
-                            class="fixed hidden top-0 left-0 w-screen h-screen bg-[#00000059] justify-center items-center"
+                            class="fixed top-0 left-0 w-screen h-screen bg-[#00000059] hidden justify-center items-center"
                         >
                             <div
-                                class="bg-white py-6 px-8 flex flex-col items-center rounded-[10px]"
-                            ></div>
+                                class="bg-[#eee] w-[90%] py-6 px-8 flex flex-col items-center rounded-[10px] relative"
+                            >
+                                <button
+                                    id="close-hitory"
+                                    class="absolute top-1 right-1 w-10 h-10 text-3xl cursor-pointer"
+                                >
+                                    <i class="ri-close-line"></i>
+                                </button>
+                                <!-- Start Absence Table -->
+                                <h3 class="font-bold">Absences</h3>
+                                <table
+                                    class="block bg-white rounded-[10px] max-w-[400px] max-md:w-[95%] mt-2 mx-auto overflow-auto"
+                                >
+                                    <thead
+                                        class="text-[#888080] block w-[400px] p-2 border-b border-[#888080]"
+                                    >
+                                        <tr class="w-full">
+                                            <th class="w-[200px] font-normal">
+                                                First Name
+                                            </th>
+                                            <th class="w-[200px] font-normal">
+                                                Last Name
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        id="absence-details-table-body"
+                                        class="block w-[400px]"
+                                    ></tbody>
+                                </table>
+                                <!-- End Absence Table -->
+                                <!-- Start Delays Table -->
+                                <h3 class="font-bold mt-4">Delays</h3>
+                                <table
+                                    class="block bg-white rounded-[10px] max-w-[600px] max-md:w-[95%] mt-2 mx-auto overflow-auto"
+                                >
+                                    <thead
+                                        class="text-[#888080] block w-[600px] p-2 border-b border-[#888080]"
+                                    >
+                                        <tr class="w-full">
+                                            <th class="w-[150px] font-normal">
+                                                First Name
+                                            </th>
+                                            <th class="w-[150px] font-normal">
+                                                Last Name
+                                            </th>
+                                            <th class="w-[150px] font-normal">
+                                                Arrival Time
+                                            </th>
+                                            <th class="w-[150px] font-normal">
+                                                Reason
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        id="delays-details-table-body"
+                                        class="block w-[600px]"
+                                    ></tbody>
+                                </table>
+                                <!-- Start Delays Table -->
+                            </div>
                         </div>
                         <!-- End Add History Details Pop up -->
                     </div>

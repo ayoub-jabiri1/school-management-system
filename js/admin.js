@@ -272,7 +272,7 @@ function getHistoryData() {
             for (let el of array) {
                 if (hist.date == el.date) {
                     hist[value].count++;
-                    hist[value].learners.push(el.id);
+                    hist[value].learners.push(el.learnerId);
                 }
             }
         }
@@ -298,11 +298,94 @@ function setHistoryDataInPage() {
                     <button
                         id="history-details"
                         class="main-btn bg-[#eee]! text-[#888080]! text-sm w-[90px] py-2 border border-[#888080]"
+                        onclick="handleHistoryDetailsTable([${hist.absence.learners}], [${hist.delay.learners}])"
                     >
                         Details
                     </button>
                 </td>
             </tr>
         `;
+    }
+}
+
+function handleHistoryDetailsTable(absenceArray, delayArray) {
+    // Selectors
+    let detailsPopup = document.getElementById("histrory-popup"),
+        absenceDetailsTable = document.getElementById(
+            "absence-details-table-body"
+        ),
+        delayDetailsTable = document.getElementById(
+            "delays-details-table-body"
+        );
+
+    // Filter the learners ids arrays from the dublicated ids
+    let absenceLearnersIds = new Set(absenceArray),
+        delayLearnersIds = new Set(delayArray);
+
+    // Show the history details pop up
+    detailsPopup.classList.replace("hidden", "flex");
+
+    // Close the pop up
+    document.getElementById("close-hitory").addEventListener("click", () => {
+        detailsPopup.classList.replace("flex", "hidden");
+    });
+
+    // Set the absence details table
+    absenceDetailsTable.innerHTML = "";
+    for (let id of absenceLearnersIds) {
+        let currentLearner = learners.find((learner) => learner.id == id);
+
+        if (currentLearner) {
+            absenceDetailsTable.innerHTML += `
+            <tr
+                class="block w-full px-2 py-4 not-last:border-b not-last:border-[#888080]"
+            >
+                <td class="w-[200px] text-center">
+                    ${currentLearner.firstName}
+                </td>
+                <td class="w-[200px] text-center">
+                    ${currentLearner.lastName}
+                </td>
+            </tr>
+        `;
+        }
+    }
+
+    // Set the delay details table
+    delayDetailsTable.innerHTML = "";
+    for (let id of delayLearnersIds) {
+        let currentLearner = learners.find((learner) => learner.id == id);
+        let currentLearnerDelayDetails = delays.find(
+            (delay) => delay.learnerId == id
+        );
+
+        if (currentLearner && currentLearnerDelayDetails) {
+            delayDetailsTable.innerHTML += `
+            <tr
+                class="block w-full px-2 py-4 not-last:border-b not-last:border-[#888080]"
+            >
+                <td class="w-[150px] text-center">
+                    ${currentLearner.firstName}
+                </td>
+                <td class="w-[150px] text-center">
+                    ${currentLearner.lastName}
+                </td>
+                <td class="w-[150px] text-center">
+                    ${
+                        currentLearnerDelayDetails.time != ""
+                            ? currentLearnerDelayDetails.time
+                            : "-"
+                    }
+                </td>
+                <td class="w-[150px] text-center">
+                    ${
+                        currentLearnerDelayDetails.reason != ""
+                            ? currentLearnerDelayDetails.reason
+                            : "-"
+                    }
+                </td>
+            </tr>
+        `;
+        }
     }
 }
