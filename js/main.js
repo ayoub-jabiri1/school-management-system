@@ -37,7 +37,7 @@ navBtns.forEach((btn) => {
 // Log out
 
 document.getElementById("log-out").addEventListener("click", () => {
-    window.location = "/";
+    window.location = "index.html";
 });
 
 function showPopup(type, text) {
