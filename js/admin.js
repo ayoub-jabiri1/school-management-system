@@ -4,7 +4,7 @@ let learnersPageBody = document.getElementById("learners-table-body"),
     addLearnerBtn = document.getElementById("add-learner-btn"),
     historyPageBody = document.getElementById("history-table-body");
 
-// <-- 3. Learners Management -->
+// <-- 2. Learners Management -->
 
 let learners = [
     { id: 1, firstName: "Alice", lastName: "Johnson", group: 1 },
@@ -48,6 +48,9 @@ registerBtn.addEventListener("click", () => {
         // Update table in page
         setLearnersInPage();
 
+        // Show success pop up
+        showPopup("success", "Learner has been added successfully!");
+
         // Reset inputs
         firstNameInput.value = "";
         lastNameInput.value = "";
@@ -63,7 +66,7 @@ cancelBtn.addEventListener("click", () => {
     popup.classList.replace("flex", "hidden");
 });
 
-// <-- 4. Absence Register -->
+// <-- 3. Absence Register -->
 
 let absences = [];
 
@@ -89,6 +92,9 @@ document
         // we have to storag that obj in the global array
         absences.push(abs);
 
+        // Show success pop up
+        showPopup("success", "Absence has been registered successfully!");
+
         // reset the inputs
         document.getElementById("input-id").value = "";
         document.getElementById("input-date").value = "";
@@ -101,7 +107,7 @@ document
         localStorage.setItem("absences", JSON.stringify(absences));
     });
 
-// <-- 5. Delay Register -->
+// <-- 4. Delay Register -->
 
 let button = document.getElementById("delay-register-btn");
 
@@ -125,7 +131,11 @@ button.addEventListener("click", function () {
         reason: reason,
         date: date.slice(0, date.indexOf(",")),
     };
+
     delays.push(del);
+
+    // Show success pop up
+    showPopup("success", "Delay has been registered successfully!");
 
     //nous velons que lorsqu'on clique sur les buttons les inputes se vident
     document.getElementById("id").value = "";
@@ -139,7 +149,7 @@ button.addEventListener("click", function () {
     localStorage.setItem("delays", JSON.stringify(delays));
 });
 
-// 6. History Page
+// 5. History Page
 
 let history = [];
 

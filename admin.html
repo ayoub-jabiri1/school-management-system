@@ -16,6 +16,14 @@
     </head>
     <body>
         <div id="app">
+            <div
+                id="success-pop-up"
+                class="fixed top-2.5 left-[50%] translate-x-[-50%] bg-[#4CAF50] text-white px-4 py-2 rounded-[10px] hidden"
+            ></div>
+            <div
+                id="fail-pop-up"
+                class="fixed top-2.5 left-[50%] translate-x-[-50%] bg-[#f44336] text-white px-4 py-2 rounded-[10px] hidden"
+            ></div>
             <!-- Start Side Bar -->
             <aside
                 id="nav-bar"
@@ -72,6 +80,13 @@
                     >
                         Absence & Delay Management System
                     </h1>
+                    <button
+                        id="log-out"
+                        class="text-xl w-[25px] h-[25px] flex justify-center items-center cursor-pointer"
+                        title="Log out"
+                    >
+                        <i class="ri-logout-box-r-line"></i>
+                    </button>
                 </header>
                 <!-- End Header -->
                 <section

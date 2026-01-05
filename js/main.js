@@ -33,3 +33,22 @@ navBtns.forEach((btn) => {
         navBar.classList.replace("left-0", "left-[-250px]");
     });
 });
+
+// Log out
+
+document.getElementById("log-out").addEventListener("click", () => {
+    window.location = "/";
+});
+
+function showPopup(type, text) {
+    let popup = document.getElementById(
+        `${type == "success" ? "success-pop-up" : "fail-pop-up"}`
+    );
+
+    popup.classList.remove("hidden");
+    popup.innerHTML = text;
+
+    setTimeout(() => {
+        popup.classList.add("hidden");
+    }, 3000);
+}

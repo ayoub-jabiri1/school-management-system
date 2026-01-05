@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Page</title>
+        <!-- Remix Icon Link -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- Custom css style -->
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <div
+                id="success-pop-up"
+                class="fixed top-2.5 left-[50%] translate-x-[-50%] bg-[#4CAF50] text-white px-4 py-2 rounded-[10px] hidden"
+            ></div>
+            <div
+                id="fail-pop-up"
+                class="fixed top-2.5 left-[50%] translate-x-[-50%] bg-[#f44336] text-white px-4 py-2 rounded-[10px] hidden"
+            ></div>
+            <!-- Start Side Bar -->
+            <aside
+                id="nav-bar"
+                class="bg-white fixed top-0 left-[-250px] z-10 w-[250px] h-screen p-4 shadow-sm transition-all"
+            >
+                <button
+                    id="close-nav"
+                    class="absolute top-1 right-1 w-10 h-10 text-3xl cursor-pointer"
+                >
+                    <i class="ri-close-line"></i>
+                </button>
+                <div class="w-[70px] mx-auto">
+                    <img src="./imgs/logo.png" class="w-full" />
+                </div>
+                <nav class="mt-6 flex flex-col gap-4">
+                    <button
+                        class="main-btn w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="dashboard-page"
+                    >
+                        Dashboard
+                    </button>
+                    <button
+                        class="w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="profile-page"
+                    >
+                        Profile
+                    </button>
+                    <button
+                        class="w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="history-page"
+                    >
+                        History
+                    </button>
+                    <button
+                        class="w-full text-[15px] rounded-[10px] transition-all"
+                        data-page="statistics-page"
+                    >
+                        Statistics
+                    </button>
+                </nav>
+            </aside>
+            <!-- End Side Bar -->
+            <div id="app-body" class="h-screen">
+                <!-- Start Header -->
+                <header class="h-[70px] p-4 flex items-center">
+                    <button
+                        id="open-nav"
+                        class="text-3xl w-10 h-10 flex justify-center items-center cursor-pointer"
+                    >
+                        <i class="ri-menu-line"></i>
+                    </button>
+                    <h1
+                        class="text-2xl max-md:text-[20px] font-bold flex-1 text-center"
+                    >
+                        Absence & Delay Management System
+                    </h1>
+                    <button
+                        id="log-out"
+                        class="text-xl w-[25px] h-[25px] flex justify-center items-center cursor-pointer"
+                        title="Log out"
+                    >
+                        <i class="ri-logout-box-r-line"></i>
+                    </button>
+                </header>
+                <!-- End Header -->
+                <section
+                    class="page-content bg-[#eee] min-h-[calc(100%-70px)] w-full relative overflow-x-hidden"
+                >
+                    <!-- Start Dashboard Page -->
+                    <div id="dashboard-page" class="show-page p-4">
+                        <h2
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            Dashborad
+                        </h2>
+                        <div
+                            class="bg-white w-300 h-150 rounded-[10px] mx-auto"
+                        >
+                            <h3
+                                class="pt-6 font-bold text-2xl text-blue-500 w-full h-fit flex justify-center"
+                            >
+                                Learner’s Dashboard
+                            </h3>
+                            <div class="flex justify-around">
+                                <div class="h-fit w-fit mt-15 text-white">
+                                    <div
+                                        class="justify-items-center-safe ml-10 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            First Name :
+                                        </p>
+                                        <p id="firstName" class="firstName">
+                                            ..............
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="justify-items-center-safe ml-10 mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Last Name :
+                                        </p>
+                                        <p id="lasttName" class="lasttName">
+                                            ..............
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="h-fit w-fit mt-15 text-white">
+                                    <div
+                                        class="justify-items-center-safe bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">Groupe :</p>
+                                        <p id="groupe" class="groupe">
+                                            ..............
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Total days recorded :
+                                        </p>
+                                        <p id="totalDaysRecorded">
+                                            ..............
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="h-fit w-fit mt-15 mr-10 text-white">
+                                    <div
+                                        class="justify-items-center-safe bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Number of absences :
+                                        </p>
+                                        <p id="nbOfAbsence">..............</p>
+                                    </div>
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Number of delays :
+                                        </p>
+                                        <p id="nbOfDelays">..............</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full flex justify-center text-white">
+                                <div
+                                    class="justify-items-center-safe mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                >
+                                    <p class="pt-6 font-bold">
+                                        Attendance rate (%) :
+                                    </p>
+                                    <p id="attendanceRate">..............</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Dashboard Page -->
+                    <!-- Start Profile Page -->
+                    <div id="profile-page" class="p-4">
+                        <h2
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            Profile
+                        </h2>
+                        <div
+                            class="bg-white w-200 h-105 rounded-[10px] mx-auto"
+                        >
+                            <h3
+                                class="flex justify-center pt-6 text-2xl text-blue-500 font-bold"
+                            >
+                                Student Informations
+                            </h3>
+                            <div class="flex">
+                                <div class="ml-15 mt-10 text-white">
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            First Name :
+                                        </p>
+                                        <p id="firstName" class="firstName">
+                                            ..............
+                                        </p>
+                                        <br />
+                                    </div>
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Last Name :
+                                        </p>
+                                        <p id="lasttName" class="lasttName">
+                                            ..............
+                                        </p>
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="ml-50 mt-10 text-white">
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">Groupe :</p>
+                                        <p id="groupe" class="groupe">
+                                            ..............
+                                        </p>
+                                        <br />
+                                    </div>
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-60 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">Status :</p>
+                                        <p id="status">..............</p>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Profile Page -->
+                    <!-- Start History Page -->
+                    <div id="history-page" class="p-4">
+                        <h3
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            History
+                        </h3>
+                    </div>
+                    <!-- End History Page -->
+                    <!-- Start Statistics Page -->
+                    <div id="statistics-page" class="p-4">
+                        <h2
+                            id="page-title"
+                            class="text-2xl font-bold max-md:text-center"
+                        >
+                            Statistics
+                        </h2>
+                        <div
+                            class="bg-white w-200 h-105 rounded-[10px] mx-auto"
+                        >
+                            <h3
+                                class="flex justify-center pt-6 text-2xl text-blue-500 font-bold"
+                            >
+                                Personal Statistics
+                            </h3>
+                            <div class="flex">
+                                <div class="ml-15 mt-10 text-white">
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-80 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Absence rate (%) :
+                                        </p>
+                                        <p id="absenceRate">..............</p>
+                                        <br />
+                                    </div>
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-80 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Delay rate (%) :
+                                        </p>
+                                        <p id="delaysRate">..............</p>
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="ml-15 mt-10 text-white">
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-80 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Number of days present :
+                                        </p>
+                                        <p id="nbOfDaysPresent">
+                                            ..............
+                                        </p>
+                                        <br />
+                                    </div>
+                                    <div
+                                        class="justify-items-center-safe mt-6 bg-blue-500 w-80 h-30 rounded-[10px] text-xl"
+                                    >
+                                        <p class="pt-6 font-bold">
+                                            Average time of late arrival :
+                                        </p>
+                                        <p id="averageTimeOfLateArrival">
+                                            ..............
+                                        </p>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Statistics Page -->
+                </section>
+            </div>
+        </div>
+        <script src="./js/main.js"></script>
+        <script src="./js/learner.js"></script>
+    </body>
+</html>
